@@ -1,34 +1,12 @@
 import React from "react";
 
-export default function UsersTable() {
-  const users = [
-    {
-      id: 1,
-      name: "Alexey Ivanov",
-      email: "ivanov.alexey@example.com",
-      lastLogin: "05:47:12, 4 Nov, 2021",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Marina Smirnova",
-      email: "smirnova.marina@gmail.com",
-      lastLogin: "06:00:12, 25 Nov, 2021",
-      status: "Blocked",
-    },
-    {
-      id: 3,
-      name: "Dmitry Kuznetsov",
-      email: "kuznetsov.dmitry@example.com",
-      lastLogin: "12:00:12, 19 Nov, 2022",
-      status: "Blocked",
-    },
-  ];
+export default function UsersTable({ users }) {
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-between mb-3">
         <div>
           <button className="btn btn-outline-primary mx-1">
+            Block
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -78,6 +56,7 @@ export default function UsersTable() {
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Last Login</th>
+            <th scope="col">Registration date</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
@@ -90,6 +69,7 @@ export default function UsersTable() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.lastLogin}</td>
+              <td>{user.registrationDate}</td>
               <td>{user.status}</td>
             </tr>
           ))}

@@ -1,6 +1,5 @@
 import Register from "./components/Register";
 import Login from "./components/Login";
-import UsersTable from "./components/UsersTable";
 import { useState } from "react";
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
       ) : (
         <Register onSwitch={() => setShowLogin(true)} />
       )}
-      <UsersTable />
     </div>
   );
 }
