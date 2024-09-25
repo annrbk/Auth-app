@@ -1,6 +1,21 @@
 import React from "react";
 
-export default function UsersTable({ users }) {
+const formatDate = (dateString) => {
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  };
+  const date = new Date(dateString);
+  return date.toLocaleString("en-GB", options).replace(",", "");
+};
+
+export default function UsersTable({ users, registeredName, onLogout }) {
+  if (!users || users.length === 0) {
+    return;
+  }
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-between mb-3">
@@ -12,7 +27,7 @@ export default function UsersTable({ users }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-lock-fill"
+              className="bi bi-lock-fill"
               viewBox="0 0 16 16"
             >
               <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
@@ -24,7 +39,7 @@ export default function UsersTable({ users }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-unlock-fill"
+              className="bi bi-unlock-fill"
               viewBox="0 0 16 16"
             >
               <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
@@ -36,16 +51,14 @@ export default function UsersTable({ users }) {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-trash-fill"
+              className="bi bi-trash-fill"
               viewBox="0 0 16 16"
             >
               <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
             </svg>
           </button>
         </div>
-        <p>
-          Hello, Marina Smirnova! <a href="/">Logout</a>
-        </p>
+        <a href="/" onClick={onLogout}>Logout</a>
       </div>
       <table className="table table-striped">
         <thead>
@@ -66,11 +79,11 @@ export default function UsersTable({ users }) {
               <td>
                 <input type="checkbox" />
               </td>
-              <td>{user.name}</td>
+              <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.lastLogin}</td>
-              <td>{user.registrationDate}</td>
-              <td>{user.status}</td>
+              <td>{user.last_login ?  formatDate(user.last_login) : "Not logged in"}</td>
+              <td>{formatDate(user.registration_date)}</td>
+              <td>{user.is_blocked ? "Blocked" : "Active"}</td>
             </tr>
           ))}
         </tbody>
