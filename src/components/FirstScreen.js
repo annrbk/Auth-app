@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function FirstScreen({ onSignUp, onLogin }) {
   return (
-    <div className="container mt-5">
-      <button className="btn btn-primary me-1" onClick={onSignUp}>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <Link to="/register" className="btn btn-primary me-2" onClick={onSignUp}>
         Sign up
-      </button>
-      <button className="btn btn-primary" onClick={onLogin}>
+      </Link>
+      <Link to="/login" className="btn btn-primary" onClick={onLogin}>
         Login
-      </button>
+      </Link>
     </div>
   );
 }

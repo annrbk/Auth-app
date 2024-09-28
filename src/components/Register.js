@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Register({ onSwitch }) {
+export default function Register() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,15 +30,28 @@ export default function Register({ onSwitch }) {
       if (response.ok) {
         const data = await response.json();
         console.log("Registration successful:", data);
+
+        if (data.userId) {
+          sessionStorage.setItem("userId", data.userId);
+          console.log("User ID saved to sessionStorage:", data.userId);
+        }
+
         setUserName("");
         setEmail("");
         setPassword("");
+        window.location.href = "/login";
       } else {
+        const data = await response.json();
         console.error("Registration failed:", response.statusText);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
     }
+  };
+
+  const onSwitch = () => {
+    navigate("/login");
   };
 
   return (
@@ -88,6 +105,9 @@ export default function Register({ onSwitch }) {
           Already have an account? Login
         </button>
       </form>
+      {errorMessage && (
+        <div className="alert alert-danger mt-3">{errorMessage}</div>
+      )}
     </div>
   );
 }

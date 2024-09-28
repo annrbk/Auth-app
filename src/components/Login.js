@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Login({ onSwitch, onLoginSuccess, setRegisteredName }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +27,12 @@ export default function Login({ onSwitch, onLoginSuccess, setRegisteredName }) {
 
       if (response.ok) {
         const data = await response.json();
-        onLoginSuccess(data.username, data.lastLogin);
+
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("userId", data.userId);
+
+        navigate("/users");
+
         setEmail("");
         setPassword("");
         setErrorMessage("");
@@ -39,7 +47,7 @@ export default function Login({ onSwitch, onLoginSuccess, setRegisteredName }) {
   return (
     <div className="container mt-5">
       <h2>Login</h2>
-        {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
