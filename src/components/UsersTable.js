@@ -31,7 +31,7 @@ export default function UsersTable() {
   const getUsers = async () => {
     const token = sessionStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://auth-app-backend-qyzb.onrender.com/users", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function UsersTable() {
       await Promise.all(
         selectedUsers.map(async (user) => {
           const response = await fetch(
-            `http://localhost:5000/api/users/block/${user.id}`,
+            `https://auth-app-backend-qyzb.onrender.com/api/users/block/${user.id}`,
             {
               method: "PUT",
               headers: {
@@ -123,7 +123,7 @@ export default function UsersTable() {
     try {
       await Promise.all(
         selectedUsers.map((user) =>
-          fetch(`http://localhost:5000/api/users/unblock/${user.id}`, {
+          fetch(`https://auth-app-backend-qyzb.onrender.com/api/users/unblock/${user.id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -146,7 +146,7 @@ export default function UsersTable() {
     try {
       await Promise.all(
         selectedUsers.map((user) =>
-          fetch(`http://localhost:5000/api/users/delete/${user.id}`, {
+          fetch(`https://auth-app-backend-qyzb.onrender.com/api/users/delete/${user.id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",

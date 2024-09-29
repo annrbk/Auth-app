@@ -19,7 +19,7 @@ export default function Register() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("https://auth-app-backend-qyzb.onrender.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
