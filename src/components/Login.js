@@ -17,7 +17,7 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch("https://auth-app-backend-qyzb.onrender.com/login", {
+      const response = await fetch(`${process.env.REACT_APP_LINK_TO_BACKEND}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

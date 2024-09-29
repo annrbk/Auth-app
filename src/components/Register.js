@@ -19,7 +19,7 @@ export default function Register() {
     };
 
     try {
-      const response = await fetch("https://auth-app-backend-qyzb.onrender.com/register", {
+      const response = await fetch(`${process.env.REACT_APP_LINK_TO_BACKEND}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export default function Register() {
         setUserName("");
         setEmail("");
         setPassword("");
-        window.location.href = "/login";
+        navigate("/login");
       } else {
         const data = await response.json();
         console.error("Registration failed:", response.statusText);

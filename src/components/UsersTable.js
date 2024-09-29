@@ -31,7 +31,7 @@ export default function UsersTable() {
   const getUsers = async () => {
     const token = sessionStorage.getItem("token");
     try {
-      const response = await fetch("https://auth-app-backend-qyzb.onrender.com/users", {
+      const response = await fetch(`${process.env.REACT_APP_LINK_TO_BACKEND}/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function UsersTable() {
       await Promise.all(
         selectedUsers.map(async (user) => {
           const response = await fetch(
-            `https://auth-app-backend-qyzb.onrender.com/api/users/block/${user.id}`,
+            `${process.env.REACT_APP_LINK_TO_BACKEND}/api/users/block/${user.id}`,
             {
               method: "PUT",
               headers: {
@@ -123,7 +123,7 @@ export default function UsersTable() {
     try {
       await Promise.all(
         selectedUsers.map((user) =>
-          fetch(`https://auth-app-backend-qyzb.onrender.com/api/users/unblock/${user.id}`, {
+          fetch(`${process.env.REACT_APP_LINK_TO_BACKEND}/api/users/unblock/${user.id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -146,7 +146,7 @@ export default function UsersTable() {
     try {
       await Promise.all(
         selectedUsers.map((user) =>
-          fetch(`https://auth-app-backend-qyzb.onrender.com/api/users/delete/${user.id}`, {
+          fetch(`${process.env.REACT_APP_LINK_TO_BACKEND}/api/users/delete/${user.id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
